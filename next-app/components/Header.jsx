@@ -19,6 +19,7 @@ const Header = () => {
           src="https://links.papareact.com/ocw"
           layout="fill"
           objectFit="contain"
+          alt="logo"
         />
       </div>
 
@@ -47,7 +48,7 @@ const Header = () => {
 
       {/* Right */}
       <div className="flex items-center space-x-4 justify-end">
-        <button className="bg-blue-700 text-white p-4">Connect Wallet</button>
+        <button className="bg-blue-700 text-white w-[120px] h-[36px] text-sm">Connect Wallet</button>
       </div>
     </div>
   </header>
