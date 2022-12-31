@@ -23,7 +23,6 @@ export const AppProvider = ({ children }) => {
         );
 
         setContract(contract);
-        return contract;
       }
     } catch (error) {
       console.log("Create Post Failed", error);
@@ -37,6 +36,7 @@ export const AppProvider = ({ children }) => {
 
   const checkIfWalletIsConnected = async () => {
     try {
+      const { ethereum } = window;
       if (!ethereum) {
         console.log("Make sure you have MetaMask!");
         return;
@@ -87,19 +87,28 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const tipOwner = async () => {
+  const tipOwner = async (pId, amount) => {
     try {
+      const tip = await contract.tipImage(pId, {
+        value: ethers.utils.parseEther(amount),
+      })
+      return tip;
     } catch (error) {
       console.log("Tip Posts...", error);
     }
   };
 
-  const getAllPosts = async () => {
+  const getAllPosts = async() => {
     try {
-      if (ethereum) {
-        const posts = await contract.getImages()
 
-      
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
+        const posts = await contract.getImages()
 
         const parsedPosts = posts.map((post, i) => ({
           pId: i,
@@ -110,7 +119,6 @@ export const AppProvider = ({ children }) => {
         }))
 
         return parsedPosts;
-      }
     } catch (error) {
       console.log("Get All Posts...", error);
     }
