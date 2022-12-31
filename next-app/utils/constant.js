@@ -1,4 +1,17 @@
 export const contractAddress = "0x65d4d23ab549A4274EA16D7AF32728aaeb02D2e3";
+export const modalStyles = {
+  content: {
+    height: "300px",
+    width: "350px",
+    margin: "auto",
+    marginTop: "150px",
+    display: "flex",
+    padding: "0px",
+  },
+  overlay: {
+    backgroundColor: "rgb(0 0 0 / 74%)",
+  },
+};
 
 export const contractABI = [
   {

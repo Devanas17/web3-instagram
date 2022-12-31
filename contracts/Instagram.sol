@@ -44,7 +44,10 @@ contract Instagram {
 
         require(_id > 0 && _id <= imageCount, "Invalid Image ID");
         require(msg.value > 0, "Tip Amount must be greater than 0");
-        require(msg.sender != _image.author, "Owner cannot tip their own images");
+        require(
+            msg.sender != _image.author,
+            "Owner cannot tip their own images"
+        );
 
         payable(_image.author).transfer(msg.value);
         _image.totalTipAmount += msg.value;
@@ -60,10 +63,10 @@ contract Instagram {
         );
     }
 
-    function getImages() public view returns(Image[] memory){
+    function getImages() public view returns (Image[] memory) {
         Image[] memory _image = new Image[](imageCount);
-        for(uint256 i = 0; i < imageCount; i++){
-            _image[i] = images[i+1];
+        for (uint256 i = 0; i < imageCount; i++) {
+            _image[i] = images[i + 1];
         }
         return _image;
     }

@@ -2,9 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import Header from "../components/Header";
-import Stories from "../components/Stories";
-import MiniProfile from "../components/MiniProfile";
-import Suggestions from "../components/Suggestions";
+
+import Feed from "../components/Feed";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,20 +19,7 @@ export default function Home() {
 
       <Header />
 
-      <main className=" mt-6 max-w-6xl mx-auto flex justify-between px-8 gap-8">
-        <section className="flex-1  overflow-x-scroll scrollbar-hide max-w-2xl ">
-          <Stories />
-          {/* <Posts /> */}
-        </section>
-
-        <section className="hidden lg:inline-flex  rounded-md shadow-md py-3 w-[300px]">
-          <div className="">
-            <MiniProfile />
-
-            <Suggestions />
-          </div>
-        </section>
-      </main>
+      <Feed />
     </>
   );
 }

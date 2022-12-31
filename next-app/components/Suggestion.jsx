@@ -10,7 +10,7 @@ const Suggestion = ({name, userName, avatar}) => {
             <h3 className="text-sm text-gray-400">{name}</h3>
         </div>
         </div>
-        <p className="text-blue-400 text-sm justify-end">Follow</p>
+        <p className="text-blue-400 text-sm justify-end hover:text-blue-600 hover:cursor-pointer">Follow</p>
     </div>
   )
 }
