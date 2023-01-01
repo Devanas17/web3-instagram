@@ -20,8 +20,8 @@ export const AppProvider = ({ children }) => {
           contractABI,
           signer
         );
-
         setContract(contract);
+
       }
     } catch (error) {
       console.log("Create Post Failed", error);
@@ -128,7 +128,7 @@ export const AppProvider = ({ children }) => {
         uploadPost,
         getAllPosts,
         tipOwner,
-        contract
+        contract,
       }}
     >
       {children}

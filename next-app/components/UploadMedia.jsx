@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState} from "react";
 import { toast } from "react-toastify";
 import { useAppContext } from "../context/context";
 import { Uploader } from "uploader";
-const notify = () => toast("Please fill all the details!");
+import Loader from "./Loader";
 
 const uploader = Uploader({
   apiKey: "free",
@@ -10,7 +10,7 @@ const uploader = Uploader({
 
 const UploadMedia = () => {
   const { uploadPost } = useAppContext();
-
+  const [isLoading, setIsLoading] = useState(false)
   const [imgUrl, setImgUrl] = useState("");
   const [caption, setCaption] = useState("");
 
@@ -33,17 +33,19 @@ const UploadMedia = () => {
     e.preventDefault();
     if (!imgUrl || !caption) {
       toast.error("Please fill all the details");
-      // return
     } else {
+      setIsLoading(true)
       toast.promise(uploadPost(imgUrl, caption), {
         loading: "Listing Item... This can take a few seconds. ⏳",
         success: "Item listed! 🎉",
         error: "Error listing item. 😢",
       });
+      setIsLoading(false)
     }
   };
   return (
     <div className="sell-container space-y-3  p-7 m-4 border-2 border-gray-300 rounded-md w-full bg-white">
+      {isLoading ? <Loader /> : ""}
       <div className="sell-input-container flex flex-col px-2">
         <span className="sell-input-title text-lg font-semibold px-1">
           Image

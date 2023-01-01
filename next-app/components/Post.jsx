@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FaRegComment, FaEthereum } from "react-icons/fa";
 import { FiSend, FiMoreHorizontal } from "react-icons/fi";
+import { toast } from "react-toastify";
 import { useAppContext } from "../context/context";
 import Loader from "./Loader";
 
 const Post = ({ author, caption, image, totalTip, id }) => {
-  const {tipOwner} = useAppContext()
+  const {tipOwner, currentAcount} = useAppContext()
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState("");
   const handleDonate = async () => {
@@ -57,7 +58,7 @@ const Post = ({ author, caption, image, totalTip, id }) => {
         <div className="mt-2">
           <p className="font-semibold text-xs">34 Likes</p>
           <div className="flex items-center space-x-4">
-            <h4 className="font-semibold text-sm">0x2fc...fhw3</h4>
+            <h4 className="font-semibold text-sm">{author.slice(0,5)}...{author.slice(-5)}</h4>
             <p className="text-sm text-gray-600">{caption}</p>
           </div>
         </div>

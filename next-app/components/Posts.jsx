@@ -3,7 +3,7 @@ import { useAppContext } from '../context/context'
 import Post from './Post'
 
 const Posts = () => {
-  const {getAllPosts} = useAppContext()
+  const {getAllPosts, ethereumClient} = useAppContext()
   const [posts, setPosts] = useState([]);
 
   const fetchPosts = async () => {
@@ -11,6 +11,7 @@ const Posts = () => {
     console.log("All Posts", data)
     setPosts(data);
   };
+
 
   useEffect(() => {
     fetchPosts()

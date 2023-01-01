@@ -8,11 +8,16 @@ import Link from "next/link";
 import { modalStyles } from "../utils/constant";
 import UploadMedia from "./UploadMedia";
 import { useAppContext } from "../context/context";
+import { useState } from "react";
 
 Modal.setAppElement("#__next");
 const Header = () => {
   const { currentAccount, connectWallet } = useAppContext();
+
   const router = useRouter();
+
+
+
   return (
     <header className="shadow-sm border-b bg-white top-0 z-50 sticky">
       <div>
@@ -55,7 +60,7 @@ const Header = () => {
         {/* Right */}
         <div className="flex items-center space-x-4 justify-end">
           <Link href="/?upload=1">
-            <AiOutlineCloudUpload className="h-7 w-7 text-black cursor-pointer" />
+            <AiOutlineCloudUpload className="h-7 w-7 text-black cursor-pointer " />
           </Link>
           {!currentAccount ? (
             <button className="bg-blue-700 text-white w-[120px] h-[36px] text-sm" onClick={e => connectWallet()}>
