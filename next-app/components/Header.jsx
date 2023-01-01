@@ -67,7 +67,7 @@ const Header = () => {
               Connect Wallet
             </button>
           ) : (
-            <div className="">{currentAccount.slice(0,5)}...{currentAccount.slice(-4)}</div>
+            <div className="bg-pink-600 text-white px-4 py-2 rounded-lg text-sm">{currentAccount.slice(0,5)}...{currentAccount.slice(-4)}</div>
           )}
         </div>
       </div>

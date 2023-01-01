@@ -17,15 +17,15 @@ const Post = ({ author, caption, image, totalTip, id }) => {
   };
 
   return (
-    <div className="bg-white border-2 border-gray-100 rounded-md p-3 mt-5">
+    <div className="bg-white border-2 border-gray-100 rounded-md p-3 mt-5 ">
       {isLoading ? <Loader />: ""}
       <div className="flex items-center justify-between">
         <p className="trucate w-[80px] text-black">{author.slice(0, 5)}...{author.slice(-5)}</p>
         <FiMoreHorizontal className="w-6 h-6" />
       </div>
 
-      <div className="relative flex-grow h-full w-full mx-auto m-5">
-        <img src={image} className="h-full w-full rounded-md" alt="" />
+      <div className="relative flex-grow w-full h-full mx-auto m-5">
+        <img src={image} className=" w-full rounded-md object-contain" alt="" />
       </div>
 
       <div className="mt-2">

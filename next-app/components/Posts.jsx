@@ -8,6 +8,7 @@ const Posts = () => {
 
   const fetchPosts = async () => {
     const data = await getAllPosts();
+    data.reverse()
     console.log("All Posts", data)
     setPosts(data);
   };

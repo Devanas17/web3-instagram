@@ -14,11 +14,11 @@ const Feed = () => {
       <Posts /> 
     </section>
 
-    <section className="hidden md:inline-flex  rounded-md shadow-md py-3 w-[300px]">
+    <section className="hidden md:inline-flex  rounded-md border-2 border-gray-100 shadow-sm py-3 w-[300px] h-[450px] ">
       <div className="">
         <MiniProfile />
         <Suggestions />
-      </div>
+      </div> 
     </section>
   </main>
   )
