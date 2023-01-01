@@ -1,7 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import { contractAddress, contractABI } from "../utils/constant";
 import { ethers } from "ethers";
-import truncateEthAddress from "truncate-eth-address";
 import { toast } from "react-toastify";
 
 export const AppContext = createContext();
@@ -41,13 +40,11 @@ export const AppProvider = ({ children }) => {
         console.log("Make sure you have MetaMask!");
         return;
       } else {
-        // console.log("We have the ethereum object", ethereum);
 
         const accounts = await ethereum.request({ method: "eth_accounts" });
 
         if (accounts.length !== 0) {
           const account = accounts[0];
-          // console.log("Found an authorized account:", account);
           setCurrentAccount(account);
         } else {
           console.log("No authorized account found");
@@ -68,8 +65,6 @@ export const AppProvider = ({ children }) => {
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
       });
-      // console.log("Connected", accounts[0]);
-      localStorage.setItem("isWalletConnected", true);
       setCurrentAccount(accounts[0]);
     } catch (error) {
       console.log(error);
@@ -80,8 +75,7 @@ export const AppProvider = ({ children }) => {
   const uploadPost = async (imgUrl, caption) => {
     try {
       const upload = await contract.uploadImage(imgUrl, caption);
-      await upload.wait()
-      
+      await upload.wait();
     } catch (error) {
       console.log("Upload Posts...", error);
     }
@@ -91,41 +85,52 @@ export const AppProvider = ({ children }) => {
     try {
       const tip = await contract.tipImage(pId, {
         value: ethers.utils.parseEther(amount),
-      })
-      return tip;
+        gasLimit: 5000000,
+      });
+      await tip.wait()
+      toast.success("Tip Successfull")
     } catch (error) {
-      console.log("Tip Posts...", error);
+      console.log("Tip Owner---", error);
+      toast.error("An Error occured")
     }
   };
 
-  const getAllPosts = async() => {
+  const getAllPosts = async () => {
     try {
-
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const contract = new ethers.Contract(
-          contractAddress,
-          contractABI,
-          signer
-        );
-        const posts = await contract.getImages()
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(
+        contractAddress,
+        contractABI,
+        signer
+      );
+      const posts = await contract.getImages();
 
-        const parsedPosts = posts.map((post, i) => ({
-          pId: i,
-          author: post.author,
-          caption: post.caption,
-          image: post.url,
-          totalTip: ethers.utils.formatEther(post.totalTipAmount.toString())
-        }))
+      const parsedPosts = posts.map((post, i) => ({
+        pId: i,
+        author: post.author,
+        caption: post.caption,
+        image: post.url,
+        totalTip: ethers.utils.formatEther(post.totalTipAmount.toString()),
+      }));
 
-        return parsedPosts;
+      return parsedPosts;
     } catch (error) {
       console.log("Get All Posts...", error);
     }
   };
 
   return (
-    <AppContext.Provider value={{ currentAccount, connectWallet, uploadPost, getAllPosts }}>
+    <AppContext.Provider
+      value={{
+        currentAccount,
+        connectWallet,
+        uploadPost,
+        getAllPosts,
+        tipOwner,
+        contract
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

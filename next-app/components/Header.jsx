@@ -58,7 +58,7 @@ const Header = () => {
             <AiOutlineCloudUpload className="h-7 w-7 text-black cursor-pointer" />
           </Link>
           {!currentAccount ? (
-            <button className="bg-blue-700 text-white w-[120px] h-[36px] text-sm">
+            <button className="bg-blue-700 text-white w-[120px] h-[36px] text-sm" onClick={e => connectWallet()}>
               Connect Wallet
             </button>
           ) : (

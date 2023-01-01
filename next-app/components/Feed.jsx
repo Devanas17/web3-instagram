@@ -14,7 +14,7 @@ const Feed = () => {
       <Posts /> 
     </section>
 
-    <section className="hidden lg:inline-flex  rounded-md shadow-md py-3 w-[300px]">
+    <section className="hidden md:inline-flex  rounded-md shadow-md py-3 w-[300px]">
       <div className="">
         <MiniProfile />
         <Suggestions />

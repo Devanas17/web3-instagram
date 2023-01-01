@@ -17,9 +17,8 @@ const Posts = () => {
   }, [])
   return (
     <div className='my-4  w-full'>
-      {/* <Post  title="All Posts" posts={posts} /> */}
       {posts.map(post => (
-        <Post key={post.pId} author={post?.author} caption={post?.caption} image={post?.image} totalTip={post?.totalTip} />
+        <Post key={post.pId} author={post?.author} caption={post?.caption} image={post?.image} totalTip={post?.totalTip} id={post.pId} />
       ))}
     </div>
   )
